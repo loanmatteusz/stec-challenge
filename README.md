@@ -83,6 +83,11 @@ docker-compose up -d
 ### Uso
 
 Acesse o frontend: http://localhost:8080
+Acesse com a conta mockada:
+```bash
+  email: test@mail.com
+  password: 123
+```
 Cadastre categorias de EPIs.
 Cadastre EPIs associados a cada categoria.
 Liste, edite e exclua EPIs e categorias.
