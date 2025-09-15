@@ -39,7 +39,7 @@ O projeto já inclui **Docker Compose** para rodar tudo de forma simples.
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/EpiManager.git
+git clone https://github.com/loanmatteusz/stec-challenge
 cd EpiManager
 ```
 
