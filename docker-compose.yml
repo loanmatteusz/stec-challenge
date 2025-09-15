@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: epi-postgres
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: EpiDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build:
+      context: ./EpiManager
+      dockerfile: Dockerfile
+    container_name: epi-backend
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=EpiDb;Username=docker;Password=123
+      - DOTNET_ENVIRONMENT=Development
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    restart: always
+
+  frontend:
+    build:
+      context: ./epi-manager-app
+      dockerfile: Dockerfile
+    container_name: epi-frontend
+    environment:
+      - VITE_API_URL=http://backend:5000
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  postgres_data:
